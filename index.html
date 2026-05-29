@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>TRON Energy Rental - схема заработка и откуда у клиентов берётся энергия</title>
+<style>
+  :root{
+    --bg:#0b0e16; --bg2:#10141f; --card:#141a28; --line:#26304a;
+    --txt:#e6e9ef; --mut:#97a1b8; --dim:#6b7693;
+    --blue:#7aa2f7; --blue-bg:#16233f; --blue-br:#39508f;
+    --amber:#f5b342; --amber-bg:#2a2113; --amber-br:#7d6320;
+    --green:#67d39a; --red:#ff5a5f; --tron:#ff060a;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:radial-gradient(1200px 600px at 70% -10%,#161d30 0,var(--bg) 55%);color:var(--txt);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 20px}
+  header{padding:64px 0 28px;border-bottom:1px solid var(--line)}
+  .kick{font-family:var(--mono);font-size:12.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--tron);margin:0 0 14px}
+  h1{font-size:clamp(28px,4.4vw,46px);line-height:1.1;margin:0 0 16px;font-weight:780;letter-spacing:-.02em}
+  h1 .g{background:linear-gradient(90deg,var(--amber),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{font-size:17.5px;color:var(--mut);max-width:760px;margin:0}
+  .chips{display:flex;flex-wrap:wrap;gap:10px;margin:26px 0 4px}
+  .chip{font-family:var(--mono);font-size:12.5px;padding:8px 12px;border:1px solid var(--line);border-radius:999px;background:var(--bg2);color:var(--mut)}
+  .chip b{color:var(--txt)}
+  section{padding:48px 0;border-bottom:1px solid var(--line)}
+  h2{font-size:clamp(22px,3vw,30px);margin:0 0 8px;letter-spacing:-.01em;font-weight:740}
+  h2 .n{font-family:var(--mono);color:var(--dim);font-size:.62em;margin-right:10px;font-weight:600}
+  .sub{color:var(--mut);max-width:820px;margin:0 0 26px;font-size:16px}
+  /* topology */
+  .diagram{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:14px;overflow-x:auto}
+  .diagram svg{display:block;min-width:780px;width:100%;height:auto}
+  svg .ttl{font:600 14px var(--sans);fill:var(--txt)}
+  svg .adr{font:500 11.5px var(--mono);fill:var(--blue)}
+  svg .adr.a{fill:var(--amber)}
+  svg .ln{font:400 12px var(--sans);fill:var(--mut)}
+  svg .lbl{font:600 12px var(--mono);fill:var(--green)}
+  svg .lbl.d{fill:var(--amber)}
+  svg .lbl.b{fill:var(--blue)}
+  svg .leg{font:400 12px var(--sans);fill:var(--dim)}
+  svg .bnr{font:600 13px var(--sans);fill:#ffd7d8}
+  /* cards */
+  .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:16px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px 20px 18px;position:relative;transition:border-color .15s,transform .15s}
+  .card:hover{border-color:var(--blue-br);transform:translateY(-2px)}
+  .card .tag{font-family:var(--mono);font-size:12px;color:var(--dim)}
+  .card h3{margin:6px 0 10px;font-size:18.5px;letter-spacing:-.01em}
+  .card p{margin:0 0 12px;color:var(--mut);font-size:14.5px}
+  .ev{font-size:13px;color:var(--green);background:rgba(103,211,154,.08);border-left:2px solid var(--green);padding:8px 12px;border-radius:0 8px 8px 0;font-family:var(--mono)}
+  .card.hack{border-top:2px solid var(--amber)}
+  .card.hack .ev{color:var(--amber);background:rgba(245,179,66,.08);border-left-color:var(--amber)}
+  /* JIT timeline */
+  .tl{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:8px 0 4px}
+  .blk{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}
+  .blk .bn{font-family:var(--mono);font-size:12px;color:var(--dim);letter-spacing:.1em}
+  .blk .act{font-weight:700;margin:8px 0 6px;font-size:15px}
+  .blk .d{font-size:13px;color:var(--mut)}
+  .blk.b1{border-color:var(--amber-br)} .blk.b1 .act{color:var(--amber)}
+  .blk.b2{border-color:var(--red)} .blk.b2 .act{color:var(--red)}
+  .blk.b3{border-color:var(--blue-br)} .blk.b3 .act{color:var(--blue)}
+  .arrowrow{text-align:center;color:var(--dim);font-family:var(--mono);font-size:18px;margin:-2px 0 14px}
+  /* table */
+  .tbl{width:100%;border-collapse:collapse;font-size:14px;overflow:hidden;border-radius:12px}
+  .tbl th,.tbl td{text-align:left;padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top}
+  .tbl thead th{background:var(--bg2);color:var(--mut);font-weight:600;font-size:12.5px;text-transform:uppercase;letter-spacing:.05em}
+  .tbl td.m{font-family:var(--mono);color:var(--blue);white-space:nowrap}
+  .tbl tr:last-child td{border-bottom:none}
+  .tbl tr.you td{background:rgba(245,179,66,.06)}
+  .tbl tr.you td.m{color:var(--amber)}
+  .num{font-family:var(--mono);color:var(--txt)}
+  /* misc */
+  .note{display:flex;gap:12px;align-items:flex-start;background:rgba(255,90,95,.06);border:1px solid rgba(255,90,95,.25);border-radius:12px;padding:16px 18px;margin-top:24px;font-size:14px;color:var(--mut)}
+  .note b{color:var(--txt)}
+  footer{padding:34px 0 70px;color:var(--dim);font-size:13px}
+  footer a{color:var(--blue);text-decoration:none}
+  footer a:hover{text-decoration:underline}
+  .legendline{display:flex;gap:24px;flex-wrap:wrap;margin:14px 2px 0;font-size:13px;color:var(--mut)}
+  .legendline span{display:inline-flex;align-items:center;gap:8px}
+  .sw{width:26px;height:0;border-top:2px solid var(--blue)}
+  .sw.d{border-top:2px dashed var(--amber)}
+  @media(max-width:560px){.tl{grid-template-columns:1fr}.arrowrow{display:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <p class="kick">TRON / Stake 2.0 / Energy Rental</p>
+  <h1>Как на аренде энергии TRON <span class="g">делают деньги</span><br>и откуда у клиентов берётся энергия, которой быть не должно</h1>
+  <p class="lede">Разбор реальной топологии on-chain (JustLend, Netts и наш supply-узел): кто кого стейкает и делегирует, где сидит маржа, и почему адрес без единого замороженного TRX переводит USDT "бесплатно". Все цифры - с mainnet через TronGrid.</p>
+  <div class="chips">
+    <div class="chip"><b>~9.19</b> энергии на 1 TRX в стейке</div>
+    <div class="chip">1 перевод USDT = <b>~65 000</b> энергии</div>
+    <div class="chip">сжечь TRX напрямую = <b>~6.5 TRX</b> (потолок цены)</div>
+    <div class="chip">покрыть стейком = заморозить <b>~7 000 TRX</b></div>
+  </div>
+</header>
+
+<section>
+  <h2><span class="n">01</span>База: почему рынок вообще существует</h2>
+  <p class="sub">За любую операцию в TRON платят энергией. Перевод USDT (TRC-20) стоит ~65 000 энергии (и ~131 000, если у получателя нулевой баланс). Свою энергию можно получить двумя способами: заморозить ~7 000 TRX и ждать (медленно, капитал заперт) или сжечь ~6.5 TRX за один перевод (дорого). Аренда даёт ту же энергию на минуту за долю этой цены - в этом весь спрос. Поставщик морозит TRX один раз и сдаёт получаемую энергию в аренду снова и снова: его предельная стоимость одного перевода стремится к нулю, а потолок цены для клиента - 6.5 TRX. Спред между ними и есть бизнес.</p>
+</section>
+
+<section>
+  <h2><span class="n">02</span>Топология взаимодействия (реальные адреса)</h2>
+  <p class="sub">Два параллельных контура. Слева - оптово-делегационный: JustLend стейкает миллиарды TRX и сдаёт энергию оптом, Netts арендует кусок и раздаёт рознице делегацией. Справа - агрегатор поставок и спонсирование: крупные стейкеры (включая наш узел) заливают энергию в пулы Netts, а пулы жгут её сами, исполняя транзакции за клиентов.</p>
+
+  <div class="diagram">
+  <svg viewBox="0 0 1040 800" role="img" aria-label="Схема потоков энергии TRON">
+    <defs>
+      <marker id="ab" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#7aa2f7"/></marker>
+      <marker id="aa" markerWidth="9" markerHeight="9" refX="7" refY="3" orient="auto"><path d="M0,0 L7,3 L0,6 Z" fill="#f5b342"/></marker>
+    </defs>
+
+    <!-- TRON network banner -->
+    <rect x="40" y="20" width="960" height="46" rx="9" fill="#2a1416" stroke="#7a2326"/>
+    <text class="bnr" x="520" y="48" text-anchor="middle">Сеть TRON - общий пул 180 млрд энергии в сутки, делится пропорционально весу замороженных TRX (~9.19 энергии на 1 TRX)</text>
+
+    <!-- LEFT: JustLend -->
+    <rect x="90" y="104" width="300" height="96" rx="11" fill="#16233f" stroke="#39508f"/>
+    <text class="ttl" x="106" y="130">JustLend DAO  -  STRXProxy</text>
+    <text class="adr" x="106" y="149">TU3kj...SLQ5  (оптовый источник)</text>
+    <text class="ln" x="106" y="170">~3.39 млрд TRX застейкано на энергию</text>
+    <text class="ln" x="106" y="188">делегирует наружу ~1.61 млрд TRX</text>
+
+    <!-- arrow JL -> OpPool -->
+    <line x1="240" y1="200" x2="240" y2="298" stroke="#7aa2f7" stroke-width="2" marker-end="url(#ab)"/>
+    <text class="lbl b" x="250" y="244">аренда 4.5M TRX</text>
+    <text class="lbl b" x="250" y="262" font-size="11">expire: none</text>
+
+    <!-- LEFT: Op pool -->
+    <rect x="90" y="300" width="300" height="98" rx="11" fill="#16233f" stroke="#39508f"/>
+    <text class="ttl" x="106" y="326">Netts - операционный пул</text>
+    <text class="adr" x="106" y="345">TBMNN...vNkYH  (раздача рознице)</text>
+    <text class="ln" x="106" y="366">арендует 4.5M у JustLend + свои 1.89M</text>
+    <text class="ln" x="106" y="384">делегирует 1.18M на 46 клиентов</text>
+
+    <!-- arrow OpPool -> clients -->
+    <line x1="250" y1="398" x2="300" y2="626" stroke="#7aa2f7" stroke-width="2" marker-end="url(#ab)"/>
+    <text class="lbl b" x="262" y="510" transform="rotate(78 262 510)">стоячая делегация ~108K каждому</text>
+
+    <!-- JustLend direct to client (multihoming) -->
+    <path d="M108,200 C 52,360 52,500 150,624" fill="none" stroke="#7aa2f7" stroke-width="1.6" stroke-dasharray="5 4" marker-end="url(#ab)"/>
+    <text class="lbl b" x="40" y="430" font-size="11" transform="rotate(-90 40 430)">JustLend напрямую клиенту</text>
+
+    <!-- RIGHT: Suppliers -->
+    <rect x="646" y="92" width="330" height="116" rx="11" fill="#2a2113" stroke="#7d6320"/>
+    <text class="ttl" x="662" y="116">Поставщики энергии (крупные стейкеры)</text>
+    <rect x="658" y="126" width="306" height="46" rx="7" fill="#3a2e12" stroke="#f5b342"/>
+    <text class="adr a" x="670" y="145">наш supply-узел  THJvqJ...N83i</text>
+    <text class="ln" x="670" y="163" fill="#f5d99a">застейкано ~92.8M, отдаёт в аренду 84.1M</text>
+    <text class="ln" x="662" y="194">+ ещё ~19 агентов (в агентский пул) и 167 (в TGs6bt)</text>
+
+    <!-- arrows suppliers -> pools -->
+    <line x1="712" y1="208" x2="660" y2="298" stroke="#f5b342" stroke-width="2" marker-end="url(#aa)"/>
+    <text class="lbl d" x="640" y="258">50M</text>
+    <line x1="905" y1="208" x2="894" y2="298" stroke="#f5b342" stroke-width="2" marker-end="url(#aa)"/>
+    <text class="lbl d" x="905" y="258">34.1M</text>
+
+    <!-- RIGHT: Agent pool -->
+    <rect x="540" y="300" width="226" height="104" rx="11" fill="#2a2113" stroke="#7d6320"/>
+    <text class="ttl" x="554" y="324">Netts - агентский пул</text>
+    <text class="adr a" x="554" y="343">TJzXvyd...7h2N</text>
+    <text class="ln" x="554" y="363">принял 91.4M от 20 агентов</text>
+    <text class="ln" x="554" y="381">жжёт 842M / 843M (99.9%)</text>
+    <text class="ln" x="554" y="399" fill="#f5d99a">энергию наружу: 0</text>
+
+    <!-- RIGHT: TGs6bt -->
+    <rect x="790" y="300" width="186" height="104" rx="11" fill="#2a2113" stroke="#7d6320"/>
+    <text class="ttl" x="804" y="324">хаб TGs6bt</text>
+    <text class="adr a" x="804" y="343">TGs6bt...CB65t</text>
+    <text class="ln" x="804" y="363">принял 146.4M</text>
+    <text class="ln" x="804" y="381">от 168 поставщиков</text>
+    <text class="ln" x="804" y="399" fill="#f5d99a">наружу: 0 (жжёт сам)</text>
+
+    <!-- pools -> clients (sponsored, dashed) -->
+    <path d="M620,404 C 600,510 580,560 560,624" fill="none" stroke="#f5b342" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#aa)"/>
+    <path d="M884,404 C 870,510 850,560 820,624" fill="none" stroke="#f5b342" stroke-width="2" stroke-dasharray="6 5" marker-end="url(#aa)"/>
+    <text class="lbl d" x="612" y="540" transform="rotate(80 612 540)">gas-free: пул жжёт энергию сам</text>
+
+    <!-- CLIENTS sink -->
+    <rect x="90" y="626" width="886" height="150" rx="11" fill="#1c2230" stroke="#3a4358"/>
+    <text class="ttl" x="106" y="652">Клиенты (розница и мерчанты)</text>
+    <rect x="104" y="662" width="430" height="60" rx="7" fill="#262d3e" stroke="#4a5570"/>
+    <text class="adr" x="116" y="683" fill="#9fb4e8">TGkHf...BqRQs - держит 2.5M TRX, своего стейка 0</text>
+    <text class="ln" x="116" y="703">энергия от 3 источников сразу = мультихоуминг</text>
+    <rect x="548" y="662" width="190" height="60" rx="7" fill="#222836" stroke="#3a4358"/>
+    <text class="ln" x="560" y="685" fill="#c7cede">46 клиентов op pool</text>
+    <text class="ln" x="560" y="704">держат делегацию</text>
+    <rect x="752" y="662" width="212" height="60" rx="7" fill="#222836" stroke="#3a4358"/>
+    <text class="ln" x="764" y="685" fill="#c7cede">клиенты gas-free</text>
+    <text class="ln" x="764" y="704">на счету 0 энергии и 0 TRX</text>
+    <text class="leg" x="106" y="748">Сплошная линия = делегация (клиент держит энергию). Пунктир = спонсирование (пул жжёт энергию сам, у клиента её нет).</text>
+  </svg>
+  </div>
+  <div class="legendline">
+    <span><i class="sw"></i> делегация: клиент получает энергию на свой счёт</span>
+    <span><i class="sw d"></i> спонсирование: пул исполняет транзакцию и жжёт энергию за клиента</span>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">03</span>На чём зарабатывают: технические приёмы</h2>
+  <p class="sub">Семь рычагов маржи. Часть - честная экономика (арбитраж, двойной доход), часть - механика блокчейна, которую выжимают на максимум (ротация, спонсирование).</p>
+  <div class="grid">
+
+    <div class="card">
+      <div class="tag">01 / арбитраж</div>
+      <h3>Опт против розницы</h3>
+      <p>Купить энергию дёшево - своим стейком, оптом у JustLend или агрегируя у поставщиков - и продать дороже в розницу. Это база всего бизнеса; всё остальное лишь повышает её КПД.</p>
+      <div class="ev">op pool арендует 4.5M у JustLend по протокольной ставке и раздаёт рознице</div>
+    </div>
+
+    <div class="card hack">
+      <div class="tag">02 / капитал-эффективность</div>
+      <h3>Ротация и JIT-делегация</h3>
+      <p>Расход энергии пишется на ПОЛУЧАТЕЛЯ, не на стейкера. Делегируя одну и ту же замороженную TRX по очереди свежим адресам, один стейк обслуживает много переводов в день - кратно больше наивного лимита 9.19 энергии на TRX. Подробно в блоке 04.</p>
+      <div class="ev">одна замороженная TRX -> N x 65K энергии в сутки</div>
+    </div>
+
+    <div class="card">
+      <div class="tag">03 / двойной доход</div>
+      <h3>sTRX: два потока на одном капитале</h3>
+      <p>Та же TRX в JustLend одновременно ГОЛОСУЕТ (награды супер-представителей) и СДАЁТСЯ в аренду на энергию. Один депозит - две выручки. Поэтому оптовая ставка JustLend такая низкая: её субсидирует доход с голосования.</p>
+      <div class="ev">STRXProxy - обёртка sTRX; JustLend держит ~3.39 млрд TRX в стейке</div>
+    </div>
+
+    <div class="card hack">
+      <div class="tag">04 / роутинг</div>
+      <h3>Агрегатор (модель Netts)</h3>
+      <p>Не владеть капиталом, а сводить спрос и предложение: всегда брать у самого дешёвого провайдера, продавать по рознице, снимать спред. Цель - утилизация под 100%, простаивающий стейк это упущенные деньги. Логика матчинга off-chain, on-chain виден только результат.</p>
+      <div class="ev">агентский пул жжёт 842M из 843M = 99.9% утилизации</div>
+    </div>
+
+    <div class="card hack">
+      <div class="tag">05 / спонсирование</div>
+      <h3>Gas-free как услуга</h3>
+      <p>Брать с мерчантов премию за "бесплатный" UX: пользователь не платит комиссию, пул сам исполняет транзакцию и жжёт энергию. Кто контролирует расход - контролирует маржу. Премия за удобство выше, чем простая аренда.</p>
+      <div class="ev">агентский пул и TGs6bt принимают энергию и жгут сами (наружу делегируют 0)</div>
+    </div>
+
+    <div class="card">
+      <div class="tag">06 / суб-аренда</div>
+      <h3>Перепродажа JustLend</h3>
+      <p>Арендовать энергию оптом у протокола JustLend по фиксированной ставке и пере-сдавать в розницу с наценкой. Чужой капитал в стейке, твоя маржа на спреде и на скорости выдачи.</p>
+      <div class="ev">op pool: acquired 4.5M от TU3kj (это и есть JustLend)</div>
+    </div>
+
+    <div class="card">
+      <div class="tag">07 / микро-косты</div>
+      <h3>Bandwidth-оптимизация</h3>
+      <p>Каждая делегация и отзыв стоит bandwidth. Профи морозят TRX на bandwidth, чтобы операции делегирования шли бесплатно, и батчат их. На объёме в сотни тысяч операций это ощутимая часть маржи.</p>
+      <div class="ev">агентский пул держит 349K TRX на bandwidth при 325K на энергию</div>
+    </div>
+
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">04</span>Откуда у клиента энергия, которой быть не должно</h2>
+  <p class="sub">Главный вопрос. Открываешь счёт клиента: стейка ноль, энергии ноль, TRX почти ноль - а USDT уходит за USDT. Четыре механизма объясняют, как энергия "появляется из ниоткуда".</p>
+
+  <div class="grid">
+    <div class="card hack">
+      <div class="tag">механизм A</div>
+      <h3>JIT-делегация (энергия на 1 блок)</h3>
+      <p>Сервис не держит энергию у клиента постоянно. Он делегирует ~65K энергии за блок ДО перевода, перевод её сжигает, сервис тут же отзывает делегацию. Посмотришь на счёт через минуту - стейка 0, энергии 0, а перевод состоялся. Энергия существовала ~3 секунды.</p>
+      <div class="ev">в истории: DelegateResource -> Trigger(transfer) -> UnDelegateResource в соседних блоках</div>
+    </div>
+    <div class="card hack">
+      <div class="tag">механизм B</div>
+      <h3>Спонсированное исполнение</h3>
+      <p>Клиент вообще никогда не держит ни энергии, ни TRX. Он подписывает разрешение (permit / gas-free), а релеер-пул отправляет транзакцию и жжёт СВОЮ энергию. USDT клиента двигается, хотя на его счету ресурсов нет в принципе.</p>
+      <div class="ev">агентский пул жжёт 842M энергии сам - это исполнение за клиентов</div>
+    </div>
+    <div class="card hack">
+      <div class="tag">механизм C</div>
+      <h3>Мультихоуминг (несколько источников)</h3>
+      <p>Один клиент получает делегацию сразу от нескольких провайдеров. Энергия "появляется", хотя у этого конкретного провайдера клиент ничего не покупал - покрыл другой. Полезно знать поставщику: часть твоей энергии может уходить туда, где её уже дал кто-то ещё.</p>
+      <div class="ev">клиент TGkHf запитан от 3 адресов сразу: op pool + JustLend + TSSGpg</div>
+    </div>
+    <div class="card hack">
+      <div class="tag">механизм D (ядро)</div>
+      <h3>Сброс счётчика used через свежие адреса</h3>
+      <p>Лимит энергии = вес стейка; израсходованное (used) копится на КОНКРЕТНОМ адресе и НЕ переносится на стейкера. Делегируешь свежему адресу - у него used = 0, полный лимит снова. Сеть отдаёт 9.19 энергии на TRX в сутки, но через ротацию по свежим получателям из той же TRX извлекается кратно больше. Вот она, "энергия, которой быть не должно".</p>
+      <div class="ev">в каждый момент вес держит один адрес; счётчик расхода у каждого свой</div>
+    </div>
+  </div>
+
+  <h3 style="margin:34px 0 12px;font-size:18px;color:var(--mut)">Тайминг JIT-делегации по блокам</h3>
+  <div class="tl">
+    <div class="blk b1">
+      <div class="bn">БЛОК N</div>
+      <div class="act">DelegateResource</div>
+      <div class="d">пул делегирует ~7 000 TRX веса -> у клиента появляется ~65K энергии</div>
+    </div>
+    <div class="blk b2">
+      <div class="bn">БЛОК N (или N+1)</div>
+      <div class="act">Перевод USDT</div>
+      <div class="d">транзакция клиента сжигает ровно эти ~65K энергии</div>
+    </div>
+    <div class="blk b3">
+      <div class="bn">БЛОК N+1 (или N+2)</div>
+      <div class="act">UnDelegateResource</div>
+      <div class="d">пул забирает стейк назад и делегирует следующему клиенту</div>
+    </div>
+  </div>
+  <div class="arrowrow">блок за блоком: тот же стейк обслуживает клиента за клиентом, у каждого свой свежий счётчик used</div>
+
+  <div class="note">
+    <div><b>Почему это не ломает сеть.</b> В каждый момент времени вес стейка отдан ровно одному адресу, поэтому мгновенная ёмкость сети не превышается. Кратность набегает во времени: расход списывается на разные адреса с независимыми счётчиками. Ограничитель - не дневной лимит, а пропускная способность (каждый delegate и undelegate это транзакция и bandwidth). Поэтому пулы и морозят TRX на bandwidth (приём 07).</div>
+  </div>
+</section>
+
+<section>
+  <h2><span class="n">05</span>Доказательства on-chain</h2>
+  <p class="sub">Все сущности и ключевые цифры, на которых построена схема. Снято с mainnet через TronGrid (getaccount / getaccountresource / getdelegatedresourcev2 / getdelegatedresourceaccountindexv2).</p>
+  <div style="overflow-x:auto">
+  <table class="tbl">
+    <thead><tr><th>Адрес</th><th>Роль</th><th>Ключевые цифры (TRX)</th></tr></thead>
+    <tbody>
+      <tr><td class="m">TU3kj...SLQ5</td><td>JustLend (STRXProxy), оптовый источник</td><td><span class="num">~3.39 млрд</span> в стейке на энергию; делегирует наружу <span class="num">~1.61 млрд</span></td></tr>
+      <tr class="you"><td class="m">THJvqJ...N83i</td><td>наш supply-узел (оптовый поставщик)</td><td>застейкано <span class="num">~92.8M</span>; отдано <span class="num">84.1M</span> (50M в агентский пул, 34.1M в TGs6bt); своих <span class="num">8.69M</span></td></tr>
+      <tr><td class="m">TJzXvyd...7h2N</td><td>Netts - агентский пул (агрегатор + потребление)</td><td>принял <span class="num">91.4M</span> от 20 агентов; жжёт <span class="num">842M / 843M</span> энергии; наружу делегирует <span class="num">0</span></td></tr>
+      <tr><td class="m">TGs6bt...CB65t</td><td>второй хаб (агрегатор + потребление)</td><td>принял <span class="num">146.4M</span> от 168 поставщиков; наружу <span class="num">0</span></td></tr>
+      <tr><td class="m">TBMNN...vNkYH</td><td>Netts - операционный пул (раздача делегацией)</td><td>арендует <span class="num">4.5M</span> у JustLend + свои <span class="num">1.89M</span>; делегирует <span class="num">1.18M</span> на 46 клиентов</td></tr>
+      <tr><td class="m">TGkHf...BqRQs</td><td>конечный клиент (розница)</td><td>держит <span class="num">2.5M</span> TRX, своего стейка <span class="num">0</span>; энергия от <span class="num">3</span> источников сразу</td></tr>
+    </tbody>
+  </table>
+  </div>
+  <div class="note" style="background:rgba(122,162,247,.06);border-color:rgba(122,162,247,.25)">
+    <div><b>Вывод про "секрет".</b> Операционный пул - это витрина розницы, а не сейф: он капитало-лёгкий и арендует энергию у JustLend. Реальный капитал сидит в supply-агрегаторах (наш узел плюс пулы на 91-146M) и в оптовом стейке JustLend на миллиарды. Маржа - это off-chain матчинг дешёвого опта против розничной цены плюс выжимание механики (ротация, спонсирование). В цепочке виден только сеттлмент.</div>
+  </div>
+</section>
+
+<footer>
+  <p>Данные сняты с TRON mainnet через публичный API TronGrid; адреса публичны в блокчейне и приведены как наблюдаемые on-chain сущности. Материал аналитический и описывает механику публичной сети (Stake 2.0, делегирование ресурсов, gas-free). Это не финансовый совет и не инструкция по обходу чьих-либо правил.</p>
+  <p>Источники механики: <a href="https://docs.justlend.org/getting_started/concepts/energy_rental/">JustLend Energy Rental</a> &middot; <a href="https://docs.justlend.org/getting_started/concepts/staked_trx/">Staked TRX (sTRX)</a> &middot; <a href="https://netts.io/">netts.io</a> &middot; <a href="https://developers.tron.network/docs/resource-model">TRON Resource Model</a></p>
+</footer>
+
+</div>
+</body>
+</html>
