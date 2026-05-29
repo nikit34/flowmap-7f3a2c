@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Аренда энергии TRON - простыми словами</title>
+<style>
+  :root{
+    --bg:#0b0e16; --bg2:#10141f; --card:#141a28; --line:#26304a;
+    --txt:#e9ecf3; --mut:#9aa4ba; --dim:#6b7693;
+    --blue:#7aa2f7; --amber:#f5b342; --green:#67d39a; --red:#ff7a7f; --tron:#ff060a;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{margin:0;background:radial-gradient(1200px 600px at 70% -10%,#161d30 0,var(--bg) 55%);color:var(--txt);font-family:var(--sans);font-size:17px;line-height:1.62;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:920px;margin:0 auto;padding:0 22px}
+  .vnav{display:inline-flex;gap:4px;padding:4px;border:1px solid var(--line);border-radius:999px;background:var(--bg2)}
+  .vnav a{font-size:13.5px;padding:7px 16px;border-radius:999px;color:var(--mut);text-decoration:none;transition:.15s}
+  .vnav a:hover{color:var(--txt)}
+  .vnav a.active{background:var(--amber);color:#1a1205;font-weight:650}
+  header{padding:34px 0 24px}
+  .kick{font-family:var(--mono);font-size:12.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--tron);margin:26px 0 12px}
+  h1{font-size:clamp(28px,4.6vw,44px);line-height:1.12;margin:0 0 14px;font-weight:800;letter-spacing:-.02em}
+  h1 .g{background:linear-gradient(90deg,var(--amber),var(--green));-webkit-background-clip:text;background-clip:text;color:transparent}
+  .lede{font-size:18.5px;color:var(--mut);margin:0;max-width:680px}
+  .callout{display:flex;gap:16px;align-items:flex-start;background:linear-gradient(180deg,rgba(245,179,66,.1),rgba(245,179,66,.03));border:1px solid rgba(245,179,66,.3);border-radius:16px;padding:20px 22px;margin:28px 0 0}
+  .callout .ic{flex:none;color:var(--amber)}
+  .callout b{color:var(--txt)}
+  .callout p{margin:0;font-size:16px;color:#e7d6b6}
+  section{padding:40px 0;border-top:1px solid var(--line)}
+  h2{font-size:clamp(22px,3.2vw,30px);margin:0 0 6px;letter-spacing:-.01em;font-weight:760}
+  .sub{color:var(--mut);margin:0 0 24px;font-size:16.5px;max-width:720px}
+  .ic{width:30px;height:30px} .ic.big{width:34px;height:34px}
+  .ways{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+  .wcard{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px 22px 20px;transition:.15s}
+  .wcard:hover{border-color:var(--amber);transform:translateY(-2px)}
+  .wcard .ic{color:var(--amber);margin-bottom:12px}
+  .wcard h3{margin:0 0 8px;font-size:18.5px;letter-spacing:-.01em}
+  .wcard p{margin:0 0 14px;color:var(--mut);font-size:15.5px}
+  .tagline{font-family:var(--mono);font-size:12.5px;padding:6px 10px;border-radius:8px;display:inline-block}
+  .tagline.bad{color:var(--red);background:rgba(255,122,127,.1)}
+  .tagline.mid{color:var(--amber);background:rgba(245,179,66,.1)}
+  .tagline.good{color:var(--green);background:rgba(103,211,154,.1)}
+  .reasons .wcard{border-top:2px solid var(--amber)}
+  .reasons .wcard .ic{color:var(--amber)}
+  .diagram{background:var(--bg2);border:1px solid var(--line);border-radius:16px;padding:18px;overflow-x:auto;margin-top:6px}
+  .mermaid{display:flex;justify-content:center;min-width:480px}
+  .mermaid svg{max-width:100%;height:auto}
+  .dcap{font-size:14px;color:var(--dim);margin:12px 2px 0}
+  .big-point{font-size:19px;color:var(--txt);background:var(--bg2);border-left:3px solid var(--green);border-radius:0 12px 12px 0;padding:18px 22px;margin-top:8px}
+  .big-point b{color:var(--green)}
+  footer{padding:30px 0 64px;color:var(--dim);font-size:13.5px;border-top:1px solid var(--line)}
+  footer a{color:var(--blue);text-decoration:none} footer a:hover{text-decoration:underline}
+  .seemore{display:inline-block;margin-top:8px;font-size:15px;color:var(--blue);text-decoration:none;border:1px solid var(--line);border-radius:10px;padding:10px 16px}
+  .seemore:hover{border-color:var(--blue)}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="vnav"><a href="index.html">Технически</a><a href="v2.html" class="active">Простыми словами</a></div>
+  <p class="kick">TRON / аренда энергии / на пальцах</p>
+  <h1>Как на аренде энергии TRON <span class="g">зарабатывают</span> - и почему перевод уходит с пустого кошелька</h1>
+  <p class="lede">Без жаргона. На одной аналогии: энергия это топливо, а перевод USDT это поездка, которая топливо тратит.</p>
+
+  <div class="callout">
+    <svg class="ic big" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/></svg>
+    <p><b>Главная аналогия.</b> Чтобы отправить USDT в сети TRON, нужна "энергия" - считай это топливом для машины. Перевод "проезжает" и сжигает немного топлива. Нет топлива - перевод не уедет или придётся переплатить.</p>
+  </div>
+</header>
+
+<section>
+  <h2>Три способа заправиться</h2>
+  <p class="sub">У любого, кто шлёт USDT, есть выбор, чем платить за "топливо". Из третьего варианта и вырос весь бизнес аренды.</p>
+  <div class="ways">
+    <div class="wcard">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></svg>
+      <h3>Купить "панель"</h3>
+      <p>Заморозить около 7000 TRX - и получать немного топлива каждый день. Минус: деньги заперты и не работают.</p>
+      <span class="tagline mid">капитал заморожен</span>
+    </div>
+    <div class="wcard">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="6" width="18" height="12" rx="2"/><path d="M3 10h18"/></svg>
+      <h3>Платить на колонке</h3>
+      <p>Сжигать TRX за каждый перевод - примерно 6.5 TRX за раз. Просто, но дорого, если переводишь часто.</p>
+      <span class="tagline bad">~6.5 TRX за перевод</span>
+    </div>
+    <div class="wcard">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="8" cy="9" r="4"/><path d="M11 12l8 8M17 18l2-2M15 20l2-2"/></svg>
+      <h3>Арендовать топливо</h3>
+      <p>Взять топливо ровно на один перевод - за копейки. Дешевле всего, до 5 раз выгоднее. Отсюда весь рынок.</p>
+      <span class="tagline good">дешевле всего</span>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Кто на этом зарабатывает</h2>
+  <p class="sub">Цепочка простая: большой завод делает топливо, перекупщик берёт его оптом и сдаёт людям в розницу. Поставщики (в том числе ты) льют своё топливо перекупщику.</p>
+  <div class="diagram">
+<pre class="mermaid">
+flowchart LR
+  F["Завод топлива<br/>JustLend<br/>огромные запасы"]:::big
+  S["Поставщики<br/>в том числе ты<br/>льют своё топливо"]:::me
+  N["Перекупщик-станция<br/>Netts"]:::mid
+  C["Клиенты<br/>шлют USDT"]:::cli
+  F -->|оптом, дёшево| N
+  S -->|сдают топливо| N
+  N -->|в розницу| C
+  classDef big fill:#16233f,stroke:#39508f,color:#e6e9ef;
+  classDef me fill:#3a2e12,stroke:#f5b342,color:#ffe9b8;
+  classDef mid fill:#2a2113,stroke:#7d6320,color:#f5d99a;
+  classDef cli fill:#1c2230,stroke:#3a4358,color:#cdd6f4;
+</pre>
+  </div>
+  <p class="dcap">Маржа: купить топливо оптом дёшево, сдать в розницу дороже - и одни и те же запасы прокрутить за день много раз.</p>
+</section>
+
+<section>
+  <h2>Загадка: у кошелька пусто, а перевод уходит</h2>
+  <p class="sub">Смотришь на кошелёк - топлива ноль, денег почти ноль, а USDT всё равно отправился. Вот четыре простых объяснения.</p>
+
+  <div class="diagram">
+<pre class="mermaid">
+sequenceDiagram
+  participant S as Станция
+  participant W as Твой кошелёк
+  participant N as Сеть TRON
+  Note over W: бак пустой
+  S->>W: наливает топливо на пару секунд
+  W->>N: перевод USDT, топливо сгорает
+  S->>W: тут же забирает остаток
+  Note over W: снова пусто, а перевод ушёл
+</pre>
+  </div>
+  <p class="dcap">Это первый и главный приём - "валет на заправке": топливо живёт у тебя считаные секунды.</p>
+
+  <div class="ways reasons" style="margin-top:22px">
+    <div class="wcard">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></svg>
+      <h3>Валет на заправке</h3>
+      <p>Залили в бак на 3 секунды, ты "проехал" перевод, и тут же слили обратно. Посмотришь потом - бак пустой, а перевод ушёл.</p>
+    </div>
+    <div class="wcard">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M6 7h12l1 13H5L6 7z"/><path d="M9 7a3 3 0 0 1 6 0"/></svg>
+      <h3>За тебя платит магазин</h3>
+      <p>Иногда топлива у тебя нет вообще: за перевод платит продавец или сервис. Как "бесплатная доставка" - платит магазин, а не ты.</p>
+    </div>
+    <div class="wcard">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/></svg>
+      <h3>Скинулись несколько</h3>
+      <p>Один кошелёк могут заправить сразу несколько сервисов. Топливо появилось, хотя у этого конкретного ты ничего не покупал - налил другой.</p>
+    </div>
+    <div class="wcard">
+      <svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 9a8 8 0 0 1 14-4l2 2"/><path d="M20 15a8 8 0 0 1-14 4l-2-2"/><path d="M18 3v4h-4M6 21v-4h4"/></svg>
+      <h3>Один запас на всех</h3>
+      <p>Те же запасы перекупщик за день одалживает сотням людей по кругу. Из маленького бака "выжимают" куда больше переводов, чем кажется.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Где на самом деле деньги</h2>
+  <div class="big-point">
+    Деньги не у "витрины", где раздают топливо в розницу. Они там, где лежат <b>большие запасы</b> - заводы вроде JustLend на миллиарды и поставщики вроде тебя. И в простом правиле: <b>купил оптом дёшево, сдал в розницу дороже, и одни запасы прокрутил много раз за день.</b> Чем больше оборот при тех же запасах, тем больше заработок.
+  </div>
+  <a class="seemore" href="index.html">Те же цифры и реальные адреса - в технической версии</a>
+</section>
+
+<footer>
+  <p>Аналогия с топливом упрощает: на самом деле энергия в TRON восстанавливается каждый день и не "сгорает" насовсем, но для понимания сути это неважно. Материал описывает механику публичной сети, не финансовый совет.</p>
+  <p>Подробнее: <a href="https://netts.io/">netts.io</a> &middot; <a href="https://docs.justlend.org/getting_started/concepts/energy_rental/">JustLend Energy Rental</a> &middot; <a href="https://developers.tron.network/docs/resource-model">TRON Resource Model</a></p>
+</footer>
+
+</div>
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({
+    startOnLoad:true, theme:'dark',
+    themeVariables:{ fontFamily:'-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,sans-serif', primaryColor:'#16233f', primaryBorderColor:'#39508f', primaryTextColor:'#e6e9ef', lineColor:'#8aa0c8' },
+    flowchart:{ curve:'basis', htmlLabels:true, useMaxWidth:true },
+    sequence:{ useMaxWidth:true },
+    securityLevel:'loose'
+  });
+</script>
+</body>
+</html>
